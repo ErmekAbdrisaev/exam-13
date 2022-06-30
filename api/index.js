@@ -8,7 +8,7 @@ const app = express();
 
 const port = 8000;
 
-const whiteList = ['http://localhost:4200', 'https://localhost:4200'];
+const whiteList = ['http://localhost:4200', 'https://localhost:4200', 'http://localhost:4210'];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -28,8 +28,8 @@ app.use('/users', users);
 const run = async () => {
   await mongoose.connect(config.mongo.db, config.mongo.options);
 
-  app.listen(port, () => {
-    console.log(`Server started on ${port} port!`);
+  app.listen(config.port, () => {
+    console.log(`Server started on ${config.port} port!`);
   });
 
   process.on('exit', () => {
