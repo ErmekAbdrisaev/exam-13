@@ -31,6 +31,9 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin']
   },
   displayName: String,
+  review: String,
+  pictures: String,
+  places: String,
 });
 
 const SALT_WORK_FACTOR = 10;

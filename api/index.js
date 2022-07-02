@@ -3,6 +3,9 @@ const cors = require('cors');
 const mongoose = require("mongoose");
 const config = require('./config');
 const users = require('./app/users');
+const places = require('./app/places');
+const pictures = require('./app/pictures');
+const review = require('./app/reviews');
 
 const app = express();
 
@@ -24,6 +27,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/users', users);
+app.use('/places', places);
+app.use('/pictures', pictures);
+app.use('/review', review);
 
 const run = async () => {
   await mongoose.connect(config.mongo.db, config.mongo.options);
