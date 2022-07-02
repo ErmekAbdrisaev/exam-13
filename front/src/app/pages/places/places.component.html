@@ -36,10 +36,20 @@
           *appHasRoles="['admin']"
         >Delete?
         </button>
+        <br>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <mat-card-content>
+            <div *ngFor="let review of reviews | async">
+              <p>Service: {{ review.serviceQlty }}</p>
+              <p>Interior: {{ review.interiorQlty }}</p>
+              <p>Food: {{ review.foodQlty }}</p>
+              <mat-card-subtitle>{{ review.description }}</mat-card-subtitle>
+            </div>
+          </mat-card-content>
+        </div>
       </mat-card>
+
     </div>
-
-
 
 
   </div>

@@ -43,16 +43,9 @@ export class PlacesComponent implements OnInit {
         this.store.dispatch(fetchReviewssRequest({id: id}));
       }
     });
-
-    this.user.subscribe(user => {
-      if (user?.token) {
-        this.token = user.token;
-      }
-    });
   }
 
   onDelete(id: string){
     this.store.dispatch(deletePlacesRequest({id: id}))
   }
-
 }
