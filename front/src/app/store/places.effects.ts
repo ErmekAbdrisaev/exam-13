@@ -3,10 +3,16 @@ import { Injectable } from '@angular/core';
 import {
   createPlacesFailure,
   createPlacesRequest,
-  createPlacesSuccess, deletePlacesFailure, deletePlacesRequest, deletePlacesSuccess,
+  createPlacesSuccess,
+  deletePlacesFailure,
+  deletePlacesRequest,
+  deletePlacesSuccess,
+  fetchPlaceFailure,
+  fetchPlaceRequest,
   fetchPlacesFailure,
   fetchPlacesRequest,
-  fetchPlacesSuccess
+  fetchPlacesSuccess,
+  fetchPlaceSuccess
 } from './places.actions';
 import { catchError, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,6 +27,14 @@ export class PlacesEffects {
     mergeMap(id => this.placesService.getPlaces().pipe(
       map(places => fetchPlacesSuccess({places})),
       catchError(() =>of(fetchPlacesFailure({error: "Something goes wrong!"})))
+    ))
+  ));
+
+  fetchPlace = createEffect(() => this.actions.pipe(
+    ofType(fetchPlaceRequest),
+    mergeMap(({id}) => this.placesService.getPlace(id).pipe(
+      map(place => fetchPlaceSuccess({place})),
+      catchError(() =>of(fetchPlaceFailure({error: "Something goes wrong!"})))
     ))
   ));
 

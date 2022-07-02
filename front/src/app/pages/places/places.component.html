@@ -26,9 +26,12 @@
           [alt]="'Photo of ' + place.title"
         >
         <mat-card-header>
-          <p>{{ place.title}}</p>
+        <p> <strong>View </strong> <a [routerLink]="['/place', place._id]"> {{ place.title }}</a></p>
         </mat-card-header>
       </mat-card>
+
     </div>
+
+
   </div>
 </ng-template>

@@ -17,7 +17,7 @@ const ReviewSchema = new Schema({
   foodQlty: Number,
   serviceQlty: Number,
   interiorQlty: Number,
-  text: {
+  description: {
     type: String,
     required: true,
   },

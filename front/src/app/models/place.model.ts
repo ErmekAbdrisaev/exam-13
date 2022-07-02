@@ -7,15 +7,16 @@ export class Place {
       displayName:string
     },
     public image: string,
+    public description: string,
   ){}
 }
 
 export interface PlaceData{
   [key: string]: any;
   title: string;
-  user: string,
+  user: string;
   image: File | null;
-  review: string,
+  description: string;
 }
 
 export interface ApiPlaceData{
@@ -26,7 +27,6 @@ export interface ApiPlaceData{
     displayName: string,
   },
   image: string,
-  review: string,
-
+  description: string,
 }
 

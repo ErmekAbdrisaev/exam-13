@@ -12,7 +12,7 @@ const PlaceSchema = new Schema({
     type: String,
     required: true
   },
-  description: String,
+  text: String,
   isAgree: Boolean,
 });
 

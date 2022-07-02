@@ -1,10 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Place, PlaceData } from '../models/place.model';
 
-
 export const fetchPlacesRequest = createAction(
-  '[Places] Fetch Request'
-);
+  '[Places] Fetch Request');
 export const fetchPlacesSuccess = createAction(
   '[Places] Fetch Success',
   props<{places: Place[]}>()
@@ -23,6 +21,19 @@ export const createPlacesSuccess = createAction(
 );
 export const createPlacesFailure = createAction(
   '[Place] Create Failure',
+  props<{error: string}>()
+);
+
+export const fetchPlaceRequest = createAction(
+  '[Places] FetchOne Request',
+  props<{id: string}>()
+);
+export const fetchPlaceSuccess = createAction(
+  '[Places] FetchOne Success',
+  props<{place: Place}>()
+);
+export const fetchPlaceFailure = createAction(
+  '[Places] FetchOne Failure',
   props<{error: string}>()
 );
 

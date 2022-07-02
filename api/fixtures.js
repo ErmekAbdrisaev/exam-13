@@ -32,17 +32,17 @@ const run = async () => {
     title: 'Mossovet',
     user: admin,
     image: 'mossovet.jpg',
-    description: "Not bad place to eat. You could go with family"
+    text: "Not bad place to eat. You could go with family"
   }, {
     title: 'OshBazaar',
     user: user,
     image: 'oshbazar.jpg',
-    description: "Very dirty place to eat. Dangerous!!!!"
+    text: "Very dirty place to eat. Dangerous!!!!"
   },{
     title: 'Alamedinsky',
     user: admin,
     image: 'alamedin.jpeg',
-    description: "Not good place to eat"
+    text: "Not good place to eat"
   });
 
   const [first, second, third] = await Review.create({
@@ -51,21 +51,21 @@ const run = async () => {
     foodQlty: 5,
     serviceQlty: 3,
     interiorQlty: 4,
-    text: "Not bad place to eat and take a rest"
+    description: "Not bad place to eat and take a rest"
   },{
     place: alamedin,
     user: admin,
     foodQlty: 1,
     serviceQlty: 3,
     interiorQlty: 2,
-    text: "Bad rather than good"
+    description: "Bad rather than good"
   },{
     place: osh,
     user: user,
     foodQlty: 2,
     serviceQlty: 1,
     interiorQlty: 2,
-    text: "Better find another place to eat and stay alive"
+    description: "Better find another place to eat and stay alive"
   })
 
   await mongoose.connection.close();

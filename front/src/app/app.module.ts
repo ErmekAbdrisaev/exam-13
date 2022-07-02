@@ -10,8 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { ActionReducer, MetaReducer } from '@ngrx/store';
 import { HasRolesDirective } from './directives/has-roles.directive';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
@@ -23,22 +22,19 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { FlexModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
-import { usersReducer } from './store/users.reducer';
-import { UsersEffects } from './store/users.effects';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { PlacesComponent } from './pages/places/places.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatDialogModule} from '@angular/material/dialog';
-import { PlacesEffects } from './store/places.effects';
 import { PlacesNewComponent } from './pages/places-new/places-new.component';
-import { placesReducer } from './store/places.reducer';
 import { ImagePipe } from './pipes/image.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { DialogComponent } from './pages/dialog/dialog.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { PlaceComponent } from './pages/place/place.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
@@ -48,7 +44,6 @@ export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   })(reducer);
 };
 
-const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -63,7 +58,8 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     PlacesComponent,
     PlacesNewComponent,
     ImagePipe,
-    // DialogComponent,
+    ReviewsComponent,
+    PlaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,9 +82,9 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     FlexModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatDialogModule,
     MatCheckboxModule,
-
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

@@ -8,12 +8,16 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const query = {};
+   const query = {};
     if (req.query.review) {
       query.review = {_id: req.query.review}
     }
-    const review = await Review.find(query).populate('place', 'title');
-    return res.send(review);
+    if(req.query.user){
+      query.user = {_id: req.query.user};
+    }
+
+    const reviews = await Review.find(query).populate('place', 'title');
+    return res.send(reviews);
   } catch (e) {
     next(e);
   }
@@ -21,29 +25,26 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const reviews = await Review.findById(req.params.id);
+    const review = await Review.findById(req.params.id);
 
-    if (!reviews) {
+    if (!review) {
       return res.status(404).send({message: "Not found"});
     }
-    return res.send(reviews);
+    return res.send(review);
   } catch (e) {
     next(e);
   }
 });
 
-router.post('/', auth, permit('admin', 'user'), async (req, res, next) => {
+router.post('/', auth, async (req, res, next) => {
   try {
-    if (!req.body.review) {
-      return res.status(404).send({message: 'Fill required fields'});
-    }
     const reviewData = {
       place: req.body.place,
-      user: req.body.user,
+      user: req.user._id,
       foodQlty: req.body.foodQlty,
       serviceQlty: req.body.serviceQlty,
       interiorQlty: req.body.interiorQlty,
-      text: req.body.text,
+      description: req.body.description,
     };
     const review = new Review(reviewData);
     await review.save();

@@ -28,10 +28,10 @@ router.get('/', async (req, res, next) => {
       query.image = {$ne: null};
     }
 
-    // if (req.query.places) {
-    //   const placesId = await Place.find({user: {_id: req.query.user}}).populate('user', 'displayName');
-    //   return res.send(placesId);
-    // }
+    if (req.query.places) {
+      const placesId = await Place.find({user: {_id: req.query.user}}).populate('user', 'displayName');
+      return res.send(placesId);
+    }
 
     if(req.query.user){
       query.user = {_id: req.query.user}
@@ -47,7 +47,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const place = await Place.findById(req.params.id);
-
+    if(!place){
+      return res.status(404).send({message: 'No such pics'})
+    }
 
     return res.send(place);
   } catch (e) {
@@ -61,7 +63,7 @@ router.post('/', auth,  upload.single('image'), async (req, res, next) => {
       user: req.user._id,
       title: req.body.title,
       image: null,
-      description: req.body.description,
+      text: req.body.text,
       isAgree: false
     };
 

@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayoutAlign="space-between flex-start">
+  <h1>Reviews</h1>
+</div>
+
+<div class="error" *ngIf="error | async">
+  {{ error | async}}</div>
+
+<mat-progress-spinner
+  *ngIf="loading | async else placesArea"
+  mode="indeterminate"
+></mat-progress-spinner>
+
+<ng-template #placesArea>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      fxFlex.lt-lg="33%"
+      fxFlex="25%"
+      *ngFor="let review of reviews | async"
+    >
+      <mat-card>
+        <mat-card-title>{{ review.foodQlty }} </mat-card-title>
+        <mat-card-title>{{ review.interiorQlty }} </mat-card-title>
+        <mat-card-title>{{ review.serviceQlty }} </mat-card-title>
+        <mat-card-subtitle>{{ review.description }}</mat-card-subtitle>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

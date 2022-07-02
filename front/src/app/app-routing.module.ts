@@ -4,6 +4,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PlacesComponent } from './pages/places/places.component';
 import { PlacesNewComponent } from './pages/places-new/places-new.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { PlaceComponent } from './pages/place/place.component';
 
 const routes: Routes = [
   {path: '', component: PlacesComponent},
@@ -11,6 +13,13 @@ const routes: Routes = [
     path: 'place-new',
     component: PlacesNewComponent,
     data: {roles: ['user']},
+  }, {
+    path: 'place/:id',
+    component: PlaceComponent,
+  },
+  {
+    path: 'review',
+    component: ReviewsComponent,
   },
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
