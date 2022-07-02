@@ -13,6 +13,7 @@ const PlaceSchema = new Schema({
     required: true
   },
   description: String,
+  isAgree: Boolean,
 });
 
 const Place = mongoose.model('Place', PlaceSchema);

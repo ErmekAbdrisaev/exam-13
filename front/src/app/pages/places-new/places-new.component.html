@@ -1,1 +1,55 @@
-<p>places-new works!</p>
+<h1>Add new place</h1>
+
+<mat-card>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{error | async}}
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          type="text"
+          name="title"
+          required
+          matInput
+          ngModel>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          type="text"
+          name="description"
+          matInput
+          ngModel></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Image:</mat-label>
+        <app-file-input
+          name="image"
+          ngModel
+        ></app-file-input>
+      </mat-form-field>
+
+      <p>Agreement <mat-checkbox
+        name="agreement"
+        required="true"
+        ngModel
+      > I agree</mat-checkbox></p>
+      <div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid || (loading | async)"
+        >SAVE
+        </button>
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>

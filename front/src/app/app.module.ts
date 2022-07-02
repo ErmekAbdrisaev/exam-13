@@ -37,6 +37,7 @@ import { PlacesEffects } from './store/places.effects';
 import { PlacesNewComponent } from './pages/places-new/places-new.component';
 import { placesReducer } from './store/places.reducer';
 import { ImagePipe } from './pipes/image.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 // import { DialogComponent } from './pages/dialog/dialog.component';
 
 
@@ -71,6 +72,7 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     BrowserAnimationsModule,
     LayoutModule,
     FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSnackBarModule,
     HttpClientModule,
@@ -79,17 +81,13 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    StoreModule.forRoot({
-      users: usersReducer,
-      places: placesReducer,
-    }, {metaReducers}),
-    EffectsModule.forRoot([UsersEffects, PlacesEffects]),
     MatMenuModule,
     MatCardModule,
     FlexModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatCheckboxModule,
 
   ],
   providers: [

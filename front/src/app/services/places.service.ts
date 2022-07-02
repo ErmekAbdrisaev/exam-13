@@ -19,7 +19,6 @@ export class PlacesService {
             placeData._id,
             placeData.title,
             placeData.user,
-            placeData.review,
             placeData.image,
           );
         });
@@ -36,7 +35,6 @@ export class PlacesService {
             placesData.title,
             placesData.user,
             placesData.image,
-            placesData.review,
           )
         })
       })

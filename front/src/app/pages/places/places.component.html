@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between flex-start">
   <h1>Places</h1>
-  <a routerLink="/places-create" mat-button *appHasRoles="['user', 'admin']">ADD NEW PLACE</a>
+  <a routerLink="/place-new" mat-button *appHasRoles="['user', 'admin']">ADD NEW PLACE</a>
 </div>
 
 <div class="error" *ngIf="error | async">{{ error | async}}</div>
@@ -27,7 +27,6 @@
         >
         <mat-card-header>
           <p>{{ place.title}}</p>
-          <p>{{ place.review}}</p>
         </mat-card-header>
       </mat-card>
     </div>

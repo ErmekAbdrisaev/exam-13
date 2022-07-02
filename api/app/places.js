@@ -48,36 +48,29 @@ router.get('/:id', async (req, res, next) => {
   try {
     const place = await Place.findById(req.params.id);
 
-    if (!place) {
-      return res.status(404).send({message: "Not found"});
-    }
+
     return res.send(place);
   } catch (e) {
     next(e);
   }
 });
 
-router.post('/', auth, permit('admin', 'user'), upload.single('image'), async (req, res, next) => {
+router.post('/', auth,  upload.single('image'), async (req, res, next) => {
   try {
-    if (!req.body.title || !req.body.user) {
-      return res.status(404).send({message: "Not found!"});
-    }
-
     const placeData = {
-      user: req.body.artist,
+      user: req.user._id,
       title: req.body.title,
-      review: req.body.review,
       image: null,
       description: req.body.description,
-      isUnderstand: false
+      isAgree: false
     };
 
     if (req.file) {
       placeData.image = req.file.filename;
     }
 
-    if (req.user.role === 'admin') {
-      placeData.isUnderstand = true;
+    if(req.body.isAgree === false){
+      return res.status(404).send({message: "You should accept agreement nor your post won't be published"})
     }
 
     const place = new Place(placeData);

@@ -7,7 +7,6 @@ export class Place {
       displayName:string
     },
     public image: string,
-    public review: string,
   ){}
 }
 
