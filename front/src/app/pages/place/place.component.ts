@@ -4,7 +4,7 @@ import { ApiPlaceData, Place, PlaceData } from '../../models/place.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { ActivatedRoute } from '@angular/router';
-import { createPlacesRequest, fetchPlaceRequest } from '../../store/places.actions';
+import { createPlacesRequest, deletePlacesRequest, fetchPlaceRequest } from '../../store/places.actions';
 import { User } from '../../models/user.model';
 import { Review, ReviewData } from '../../models/review.model';
 import { NgForm } from '@angular/forms';
@@ -52,5 +52,9 @@ export class PlaceComponent implements OnInit {
     const reviewData: ReviewData = this.form.value;
     reviewData.place = this.placeId._id;
     this.store.dispatch(createReviewsRequest({reviewsData: reviewData}))
+  }
+
+  onDelete(id: string){
+    this.store.dispatch(deletePlacesRequest({id: id}))
   }
 }

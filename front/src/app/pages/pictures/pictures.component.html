@@ -1,0 +1,25 @@
+<div class="error" *ngIf="error | async">{{ error | async}}</div>
+
+<mat-progress-spinner
+  *ngIf="loading | async else placesArea"
+  mode="indeterminate"
+></mat-progress-spinner>
+
+<ng-template #placesArea>
+  <div *ngFor="let picture of pictures | async" style="margin-bottom: 20px">
+    <mat-card class="example-card">
+      <mat-card-title-group>
+        <mat-card-title>{{ picture.place }}</mat-card-title>
+        <img mat-card-lg-image [src]="picture.image | image" [alt]="picture.place">
+      </mat-card-title-group>
+      <button
+        type="submit"
+        mat-raised-button
+        color="warn"
+        (click)="onDeletePicture(picture._id)"
+        *appHasRoles="['admin']"
+      >Delete pic?
+      </button>
+    </mat-card>
+  </div>
+</ng-template>

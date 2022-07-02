@@ -27,22 +27,6 @@ export class PlacesService {
     );
   }
 
-  // getUsersPlaces(id: string){
-  //   return this.http.get<ApiPlaceData[]>(environment.apiUrl + `'places?user=&{id}`).pipe(
-  //     map(response => {
-  //       return response.map(placesData => {
-  //         return new Place(
-  //           placesData._id,
-  //           placesData.title,
-  //           placesData.user,
-  //           placesData.image,
-  //           placesData.description,
-  //         )
-  //       })
-  //     })
-  //   );
-  // }
-
   getPlace(id: string){
     return this.http.get<ApiPlaceData>(environment.apiUrl + `/places/${id}`).pipe(
       map(result => {

@@ -6,6 +6,7 @@ import { PlacesComponent } from './pages/places/places.component';
 import { PlacesNewComponent } from './pages/places-new/places-new.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { PlaceComponent } from './pages/place/place.component';
+import { PicturesComponent } from './pages/pictures/pictures.component';
 
 const routes: Routes = [
   {path: '', component: PlacesComponent},
@@ -16,7 +17,7 @@ const routes: Routes = [
   }, {
     path: 'place/:id',
     component: PlaceComponent,
-  },
+  },{path: 'pictures', component: PicturesComponent},
   {
     path: 'review',
     component: ReviewsComponent,

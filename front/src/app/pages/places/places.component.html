@@ -28,9 +28,18 @@
         <mat-card-header>
         <p> <strong>View </strong> <a [routerLink]="['/place', place._id]"> {{ place.title }}</a></p>
         </mat-card-header>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          (click)="onDelete(place._id)"
+          *appHasRoles="['admin']"
+        >Delete?
+        </button>
       </mat-card>
-
     </div>
+
+
 
 
   </div>

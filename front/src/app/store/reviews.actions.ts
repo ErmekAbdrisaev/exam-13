@@ -14,6 +14,19 @@ export const fetchReviewsFailure = createAction(
   props<{error: string}>()
 );
 
+export const fetchReviewRequest = createAction(
+  '[Reviews] Fetch Request',
+  props<{id: string}>()
+);
+export const fetchReviewSuccess = createAction(
+  '[Reviews] Fetch Success',
+  props<{review: Review}>()
+);
+export const fetchReviewFailure = createAction(
+  '[Reviews] Fetch Failure',
+  props<{error: string}>()
+);
+
 export const createReviewsRequest = createAction(
   '[Reviews] Create Request',
   props<{reviewsData: ReviewData}>()

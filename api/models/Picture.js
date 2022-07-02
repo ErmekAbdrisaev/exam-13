@@ -10,6 +10,7 @@ const PictureSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  image: String,
 });
 
 const Picture = mongoose.model('Picture', PictureSchema);

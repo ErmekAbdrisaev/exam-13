@@ -5,10 +5,15 @@ import { Injectable } from '@angular/core';
 import { catchError, mergeMap, of, tap } from 'rxjs';
 import {
   createReviewsFailure,
-  createReviewsRequest, createReviewsSuccess, deleteReviewsFailure, deleteReviewsRequest, deleteReviewsSuccess,
+  createReviewsRequest,
+  createReviewsSuccess,
+  deleteReviewsFailure,
+  deleteReviewsRequest,
+  deleteReviewsSuccess, fetchReviewFailure,
+  fetchReviewRequest,
   fetchReviewsFailure,
   fetchReviewssRequest,
-  fetchReviewsSuccess
+  fetchReviewsSuccess, fetchReviewSuccess
 } from './reviews.actions';
 import { map } from 'rxjs/operators';
 
@@ -20,6 +25,14 @@ export class ReviewsEffects {
     mergeMap(() => this.reviewsService.getReviews().pipe(
       map(reviews => fetchReviewsSuccess({reviews})),
       catchError(() =>of(fetchReviewsFailure({error: "Something goes wrong!"})))
+    ))
+  ));
+
+  fetchReview = createEffect(() => this.actions.pipe(
+    ofType(fetchReviewRequest),
+    mergeMap(({id}) => this.reviewsService.getReview(id).pipe(
+      map(review => fetchReviewSuccess({review})),
+      catchError(() => of(fetchReviewFailure({error: 'Something went wrong'})))
     ))
   ));
 

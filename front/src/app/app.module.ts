@@ -35,6 +35,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { PlaceComponent } from './pages/place/place.component';
 import { MatSelectModule } from '@angular/material/select';
+import { PicturesComponent } from './pages/pictures/pictures.component';
 
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
@@ -60,6 +61,7 @@ export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
     ImagePipe,
     ReviewsComponent,
     PlaceComponent,
+    PicturesComponent,
   ],
   imports: [
     BrowserModule,

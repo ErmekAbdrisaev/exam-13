@@ -83,7 +83,7 @@ router.post('/', auth,  upload.single('image'), async (req, res, next) => {
   }
 });
 
-router.delete(':id', auth, permit('admin'), async(req, res, next) =>{
+router.delete('/:id', auth, permit('admin'), async(req, res, next) =>{
   try{
     if(req.body.user === 'admin'){
       const place = await Place.deleteOne({_id: req.params.id});

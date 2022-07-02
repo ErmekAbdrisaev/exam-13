@@ -9,9 +9,10 @@ import { ApiReviewData, Review, ReviewData } from '../models/review.model';
 })
 
 export class ReviewService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getReviews(){
+  getReviews() {
     return this.http.get<ApiReviewData[]>(environment.apiUrl + '/review').pipe(
       map(response => {
         return response.map(reviewData => {
@@ -29,35 +30,35 @@ export class ReviewService {
   }
 
   getReview(id: string){
-    return this.http.get<ApiReviewData[]>(environment.apiUrl + `review?user=&{id}`).pipe(
-      map(response => {
-        return response.map(reviewData => {
-          return new Review(
-            reviewData._id,
-            reviewData.user,
-            reviewData.foodQlty,
-            reviewData.serviceQlty,
-            reviewData.interiorQlty,
-            reviewData.description,
-          )
-        })
+    return this.http.get<ApiReviewData>(environment.apiUrl + `/review/${id}`).pipe(
+      map(result => {
+        return result;
       })
     );
   }
 
-  // getSingleReview(id: string){
-  //   return this.http.get<ApiReviewData>(environment.apiUrl + `/reviews/${id}`).pipe(
-  //     map(result => {
-  //       return result;
+  // getReview(id: string) {
+  //   return this.http.get<ApiReviewData[]>(environment.apiUrl + `review?user=&{id}`).pipe(
+  //     map(response => {
+  //       return response.map(reviewData => {
+  //         return new Review(
+  //           reviewData._id,
+  //           reviewData.user,
+  //           reviewData.foodQlty,
+  //           reviewData.serviceQlty,
+  //           reviewData.interiorQlty,
+  //           reviewData.description,
+  //         );
+  //       });
   //     })
   //   );
   // }
 
-  createReview(reviewData: ReviewData){
+  createReview(reviewData: ReviewData) {
     return this.http.post(environment.apiUrl + '/review', reviewData);
   }
 
-  removeReview(id: string){
+  removeReview(id: string) {
     return this.http.delete(environment.apiUrl + `/review${id}`);
   }
 }

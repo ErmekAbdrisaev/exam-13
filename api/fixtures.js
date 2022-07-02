@@ -4,6 +4,7 @@ const {nanoid} = require("nanoid");
 const User = require('./models/User');
 const Place = require('./models/Place');
 const Review = require("./models/Review");
+const Picture = require("./models/Picture");
 
 const run = async () => {
   await mongoose.connect(config.mongo.db, config.mongo.options);
@@ -66,6 +67,32 @@ const run = async () => {
     serviceQlty: 1,
     interiorQlty: 2,
     description: "Better find another place to eat and stay alive"
+  });
+
+  await Picture.create({
+    place: alamedin,
+    user: admin,
+    image: '5-2.jpg'
+  },{
+    place: alamedin,
+    user: admin,
+    image: 'mam.jpg'
+  },{
+    place: alamedin,
+    user: user,
+    image: 'maminadacha.jpg'
+  },{
+    place: osh,
+    user: user,
+    image: 'mamino.jpg'
+  },{
+    place: osh,
+    user: user,
+    image: 'maminadacha2.jpg'
+  },{
+    place: osh,
+    user: user,
+    image: 'maminadacha.jpg'
   })
 
   await mongoose.connection.close();

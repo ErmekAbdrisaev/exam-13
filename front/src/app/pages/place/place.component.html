@@ -23,78 +23,84 @@
       <mat-card-subtitle>
         <p> {{ placeId.description }}</p>
       </mat-card-subtitle>
-
       <img [src]="placeId.image | image" [alt]="'Photo of ' + placeId.title">
-
-
     </div>
   </div>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    (click)="onDelete(placeId._id)"
+    *appHasRoles="['admin']"
+  >Delete place?
+  </button>
+  <app-pictures fxLayout="row wrap" fxLayoutGap="8px grid"></app-pictures>
 </ng-template>
 
 <br>
 
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <mat-card-content>
-      <div *ngFor="let review of reviews | async">
-        <p>Service: {{ review.serviceQlty }}</p>
-        <p>Interior: {{ review.interiorQlty }}</p>
-        <p>Food: {{ review.foodQlty }}</p>
-        <mat-card-subtitle>{{ review.description }}</mat-card-subtitle>
-      </div>
-    </mat-card-content>
-  </div>
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <mat-card-content>
+    <div *ngFor="let review of reviews | async">
+      <p>Service: {{ review.serviceQlty }}</p>
+      <p>Interior: {{ review.interiorQlty }}</p>
+      <p>Food: {{ review.foodQlty }}</p>
+      <mat-card-subtitle>{{ review.description }}</mat-card-subtitle>
+    </div>
+  </mat-card-content>
+</div>
 
 <br>
 
-  <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+<form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
 
+  <mat-form-field appearance="outline">
+    <mat-label>Add review</mat-label>
+    <textarea
+      type="text"
+      name="description"
+      matInput
+      ngModel
+    ></textarea>
+  </mat-form-field>
+
+  <div class="select-block">
     <mat-form-field appearance="outline">
-      <mat-label>Add review</mat-label>
-      <textarea
-        type="text"
-        name="description"
-        matInput
-        ngModel
-        ></textarea>
+      <mat-label>Food quality</mat-label>
+      <mat-select name="foodQuality" ngModel>
+        <mat-option *ngFor="let foodQlty of arrQlty" [value]="foodQlty">{{ foodQlty }}</mat-option>
+      </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Service quality</mat-label>
+      <mat-select name="serviceQuality" ngModel>
+        <mat-option *ngFor="let servQlty of arrQlty" [value]="servQlty">{{ servQlty }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Interior quality</mat-label>
+      <mat-select name="interiorQuality" ngModel>
+        <mat-option *ngFor="let interQlty of arrQlty" [value]="interQlty">{{ interQlty }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-    <div class="select-block">
-        <mat-form-field appearance="outline">
-          <mat-label>Food quality</mat-label>
-          <mat-select name="foodQuality" ngModel>
-            <mat-option *ngFor="let foodQlty of arrQlty" [value]="foodQlty">{{ foodQlty }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Service quality</mat-label>
-          <mat-select name="serviceQuality" ngModel>
-            <mat-option *ngFor="let servQlty of arrQlty" [value]="servQlty">{{ servQlty }}</mat-option>
-          </mat-select>
-        </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Interior quality</mat-label>
-        <mat-select name="interiorQuality" ngModel>
-          <mat-option *ngFor="let interQlty of arrQlty" [value]="interQlty">{{ interQlty }}</mat-option>
-        </mat-select>
+        <mat-label>Image:</mat-label>
+        <app-file-input
+          name="image"
+          ngModel
+        ></app-file-input>
       </mat-form-field>
-    </div>
 
-<!--    <mat-form-field appearance="outline">-->
-<!--      <mat-label>Image:</mat-label>-->
-<!--      <app-file-input-->
-<!--        name="image"-->
-<!--        ngModel-->
-<!--      ></app-file-input>-->
-<!--    </mat-form-field>-->
-
-    <div>
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-      >SAVE
-      </button>
-    </div>
-  </form>
+  <div>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >SAVE
+    </button>
+  </div>
+</form>
 
 <br>

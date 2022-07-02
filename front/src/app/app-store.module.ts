@@ -8,6 +8,8 @@ import { PlacesEffects } from './store/places.effects';
 import { placesReducer } from './store/places.reducer';
 import { ReviewsEffects } from './store/reviews.effects';
 import { reviewsReducer } from './store/reviews.reducer';
+import { PicturesEffects } from './store/pictures.effects';
+import { picturesReducer } from './store/pictures.reducer';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -22,9 +24,10 @@ const reducers = {
   users: usersReducer,
   places: placesReducer,
   reviews: reviewsReducer,
+  pictures: picturesReducer,
 };
 
-const effects = [UsersEffects, PlacesEffects, ReviewsEffects];
+const effects = [UsersEffects, PlacesEffects, ReviewsEffects, PicturesEffects];
 
 @NgModule({
   imports: [

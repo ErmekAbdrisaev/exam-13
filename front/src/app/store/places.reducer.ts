@@ -22,7 +22,6 @@ const initialState: PlacesState = {
   fetchError: null,
   createLoading: false,
   createError: null,
-  publishLoading: false,
 };
 
 export const placesReducer = createReducer(
