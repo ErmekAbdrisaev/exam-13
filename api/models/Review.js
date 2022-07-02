@@ -3,12 +3,23 @@ const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
   place: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'Place',
+    required: true,
+
   },
   user:{
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true,
+
+  },
+  foodQlty: Number,
+  serviceQlty: Number,
+  interiorQlty: Number,
+  text: {
+    type: String,
+    required: true,
   },
 });
 

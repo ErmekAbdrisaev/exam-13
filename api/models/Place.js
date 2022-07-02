@@ -5,16 +5,14 @@ const PlaceSchema = new Schema({
   title: String,
   user:{
     type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  review: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: 'User',
+    required: true,
   },
   image:{
-    type: Schema.Types.ObjectId,
-    ref: "User"
+    type: String,
+    required: true
   },
+  description: String,
 });
 
 const Place = mongoose.model('Place', PlaceSchema);

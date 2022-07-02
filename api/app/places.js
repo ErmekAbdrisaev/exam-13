@@ -5,8 +5,7 @@ const {nanoid} = require('nanoid');
 const config = require('../config');
 const auth = require("../middlewear/auth");
 const permit = require("../middlewear/permit");
-const User = require("../models/User");
-const Place = require('/models/Place');
+const Place = require("../models/Place");
 
 const router = express.Router();
 
@@ -24,10 +23,22 @@ const upload = multer({storage});
 router.get('/', async (req, res, next) => {
   try {
     const query = {};
-    if (req.query.places) {
-      const placesId = await Place.find({user: {_id: req.query.user}}).populate('user', 'displayName');
-      return res.send(placesId);
+
+    if (req.query.filter === 'image') {
+      query.image = {$ne: null};
     }
+
+    // if (req.query.places) {
+    //   const placesId = await Place.find({user: {_id: req.query.user}}).populate('user', 'displayName');
+    //   return res.send(placesId);
+    // }
+
+    if(req.query.user){
+      query.user = {_id: req.query.user}
+    }
+
+    const places = await Place.find(query).populate('user','displayName');
+    return res.send(places);
   } catch (e) {
     next(e);
   }
@@ -57,6 +68,7 @@ router.post('/', auth, permit('admin', 'user'), upload.single('image'), async (r
       title: req.body.title,
       review: req.body.review,
       image: null,
+      description: req.body.description,
       isUnderstand: false
     };
 

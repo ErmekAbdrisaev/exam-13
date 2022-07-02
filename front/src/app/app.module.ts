@@ -30,6 +30,15 @@ import { MatInputModule } from '@angular/material/input';
 import { usersReducer } from './store/users.reducer';
 import { UsersEffects } from './store/users.effects';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { PlacesComponent } from './pages/places/places.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PlacesEffects } from './store/places.effects';
+import { PlacesNewComponent } from './pages/places-new/places-new.component';
+import { placesReducer } from './store/places.reducer';
+import { ImagePipe } from './pipes/image.pipe';
+// import { DialogComponent } from './pages/dialog/dialog.component';
+
 
 export const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -50,7 +59,10 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     HasRolesDirective,
     LoginComponent,
     RegisterComponent,
-
+    PlacesComponent,
+    PlacesNewComponent,
+    ImagePipe,
+    // DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,12 +81,16 @@ const metaReducers: Array<MetaReducer> = [localStorageSyncReducer];
     MatListModule,
     StoreModule.forRoot({
       users: usersReducer,
+      places: placesReducer,
     }, {metaReducers}),
-    EffectsModule.forRoot([UsersEffects,]),
+    EffectsModule.forRoot([UsersEffects, PlacesEffects]),
     MatMenuModule,
     MatCardModule,
     FlexModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

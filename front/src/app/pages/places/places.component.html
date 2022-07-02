@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutAlign="space-between flex-start">
+  <h1>Places</h1>
+  <a routerLink="/places-create" mat-button *appHasRoles="['user', 'admin']">ADD NEW PLACE</a>
+</div>
+
+<div class="error" *ngIf="error | async">{{ error | async}}</div>
+
+<mat-progress-spinner
+  *ngIf="loading | async else plcsArea"
+  mode="indeterminate"
+></mat-progress-spinner>
+
+<ng-template #plcsArea>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      fxFlex.lt-lg="33%"
+      fxFlex="25%"
+      *ngFor="let place of places | async"
+    >
+      <mat-card class="example-card">
+        <img
+          mat-card-image
+          [src]="place.image | image"
+          [alt]="'Photo of ' + place.title"
+        >
+        <mat-card-header>
+          <p>{{ place.title}}</p>
+          <p>{{ place.review}}</p>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

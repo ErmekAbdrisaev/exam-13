@@ -2,6 +2,7 @@ const express = require('express');
 const Review = require("../models/Review");
 const auth = require("../middlewear/auth");
 const permit = require("../middlewear/permit");
+const Place = require("../models/Place");
 
 const router = express.Router();
 
@@ -18,6 +19,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const reviews = await Review.findById(req.params.id);
+
+    if (!reviews) {
+      return res.status(404).send({message: "Not found"});
+    }
+    return res.send(reviews);
+  } catch (e) {
+    next(e);
+  }
+});
+
 router.post('/', auth, permit('admin', 'user'), async (req, res, next) => {
   try {
     if (!req.body.review) {
@@ -26,6 +40,10 @@ router.post('/', auth, permit('admin', 'user'), async (req, res, next) => {
     const reviewData = {
       place: req.body.place,
       user: req.body.user,
+      foodQlty: req.body.foodQlty,
+      serviceQlty: req.body.serviceQlty,
+      interiorQlty: req.body.interiorQlty,
+      text: req.body.text,
     };
     const review = new Review(reviewData);
     await review.save();
